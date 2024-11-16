@@ -5,22 +5,26 @@ pipeline {
         SERVICE_NAME = 'adservice'
         DOCKER_USERNAME = 'obusorezekiel'
         DOCKER_IMAGE = 'adservice'
-         SONARQUBE_PROJECT_ID = 'adservice'  
+        SONARQUBE_PROJECT_ID = 'adservice'
     }
 
     stages {
         stage('Checkout SCM') {
-            checkout scm
+            steps {
+                checkout scm
+            }
         }
 
         stage('SonarQube Analysis') {
-            withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'sonarqube-token-ezekiel') {
-                script {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    script {
                         def scannerHome = tool 'SonarQubeScanner'
                         dir("src/${SERVICE_NAME}") {
                             sh "chmod +x gradlew"
                             sh "./gradlew clean"
                             sh "./gradlew sonar -Dsonar.projectKey=${SONARQUBE_PROJECT_ID}"
+                        }
                     }
                 }
             }
