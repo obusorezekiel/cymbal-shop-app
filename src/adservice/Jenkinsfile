@@ -1,7 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'JDK19'
+    }
     environment {
+        JAVA_HOME = "${tool 'JDK19'}"
         SERVICE_NAME = 'adservice'
         DOCKER_USERNAME = 'obusorezekiel'
         DOCKER_IMAGE = 'adservice'
