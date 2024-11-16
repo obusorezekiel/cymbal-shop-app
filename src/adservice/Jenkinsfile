@@ -21,13 +21,9 @@ pipeline {
                             sh "chmod +x gradlew"
                             sh "./gradlew clean"
                             sh "./gradlew sonar -Dsonar.projectKey=${SONARQUBE_PROJECT_ID}"
-                        }
                     }
+                }
             }
-          }
         }
     }
-
-
-
 }
