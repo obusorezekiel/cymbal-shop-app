@@ -23,7 +23,7 @@ pipeline {
                         dir("src/${SERVICE_NAME}") {
                             sh "chmod +x gradlew"
                             sh "./gradlew clean"
-                            sh "./gradlew sonar -PjavaVersion=17 -Dsonar.projectKey=${SONARQUBE_PROJECT_ID}"
+                            sh "./gradlew sonar -PjavaVersion=19 -Dsonar.projectKey=${SONARQUBE_PROJECT_ID}"
                         }
                     }
                 }
