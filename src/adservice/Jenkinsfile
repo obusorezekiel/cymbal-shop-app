@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'JDK19'
+    }
+
     environment {
         SERVICE_NAME = 'adservice'
         DOCKER_USERNAME = 'obusorezekiel'
@@ -23,7 +27,7 @@ pipeline {
                         dir("src/${SERVICE_NAME}") {
                             sh "chmod +x gradlew"
                             sh "./gradlew clean"
-                            sh "./gradlew sonar -PjavaVersion=19 -Dsonar.projectKey=${SONARQUBE_PROJECT_ID}"
+                            sh "./gradlew sonar -Dsonar.projectKey=${SONARQUBE_PROJECT_ID}"
                         }
                     }
                 }
